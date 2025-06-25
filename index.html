@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizim Masalımız</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Montserrat:wght@400;500&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="main-container">
+
+        <!-- Adım 0: Zarf -->
+        <div id="step-0" class="step active-step">
+            <div id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body"></div>
+                <div class="envelope-message">
+                    <div class="heart-icon">💌</div>
+                    Sadece sana özel bir sır...
+                </div>
+            </div>
+        </div>
+
+        <!-- Adım 1: Mektup -->
+        <div id="step-1" class="step">
+            <div id="letter-card">
+                <h1>Hayatımın Işığı, Canım Sevgilim,</h1>
+                <p>Bu satırları sana kalbimin en derin, en saf ve yalnızca sana ait olan köşesinden yazıyorum. Hayatıma girdiğin o ilk günden beri, sanki tüm renkler daha parlak, tüm melodiler daha anlamlı ve tüm anlar daha değerli oldu. Sen, benim en güzel şiirim, hiç bitmesini istemediğim şarkım ve en karanlık gecelerimde bile yolumu aydınlatan kutup yıldızımsın.</p>
+                <p>Seninle geçen her an, ruhuma işlenen paha biçilmez birer hediye gibi. Birlikte attığımız kahkahalar, en zor zamanlarda birbirimize sarılışımız, gözlerimin içine her baktığında hissettiğim o tarifsiz güven... Tüm bunlar, sıradan bir varoluşu, unutulmaz bir aşk masalına dönüştürdü.</p>
+                <p>Şimdi, bu masalın en heyecanlı, en nefes kesici bölümüne geçmek için, sana kalbimin her atışıyla sorduğum o soruyu sormak istiyorum...</p>
+                <div class="tap-instruction">Devam etmek için dokun...</div>
+            </div>
+        </div>
+        
+        <!-- Adım 2: Teklif -->
+        <div id="step-2" class="step">
+            <div class="content-card">
+                <h1 class="proposal-title">Bu masalın son sayfasını<br>birlikte yazalım mı?</h1>
+                <div class="button-group">
+                    <button id="yes-button" class="app-button yes">EVET!</button>
+                    <button id="no-button" class="app-button no">Hayır</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adım 3: İsim Alma -->
+        <div id="step-3" class="step">
+            <div class="content-card">
+                <h2>Masalımızın Baş Kahramanı...</h2>
+                <p>Bu "Evet"i ölümsüzleştirmek için, lütfen adını yazar mısın hayatımın anlamı?</p>
+                <input type="text" id="partner-name-input" class="app-input" placeholder="Adını buraya yaz...">
+                <button id="submit-name-btn" class="app-button">Sözleşmeye Geçelim</button>
+            </div>
+        </div>
+
+        <!-- Adım 4: Sözleşme -->
+        <div id="step-4" class="step">
+            <div id="contract-card">
+                <h2>❤️ Bizim Anayasamız ❤️</h2>
+                <div id="contract-progress-bar"><div id="contract-progress"></div></div>
+                <div id="clause-display-area">
+                    <!-- JS ile dinamik olarak doldurulacak -->
+                </div>
+                <div id="custom-clause-area" class="hidden">
+                    <p>Kendi kuralını ekle:</p>
+                    <input type="text" id="custom-clause-input" class="app-input" placeholder="Örn: Haftada bir film gecesi yapılacak.">
+                    <button id="add-custom-clause-btn" class="app-button">Maddeyi Ekle</button>
+                </div>
+                <button id="show-add-clause-btn" class="app-button secondary">Kendi Maddeni Ekle</button>
+                <button id="finish-contract-btn" class="app-button hidden">Anayasayı Onayla!</button>
+            </div>
+        </div>
+
+        <!-- Adım 5: Oyun Alanı -->
+        <div id="step-5" class="step">
+            <div id="game-zone-container">
+                <!-- Oyun kartları JS ile buraya eklenecek -->
+            </div>
+        </div>
+
+        <!-- Adım 6: Sertifika (Büyük Final) -->
+        <div id="step-6" class="step">
+            <div id="certificate-wrapper">
+                <div id="certificate">
+                    <div class="certificate-border">
+                        <div class="certificate-content">
+                            <div class="certificate-watermark"></div>
+                            <span class="cert-title-top">Resmi Aşk Beyanı</span>
+                            <h2>AŞK YEMİNİ SERTİFİKASI</h2>
+                            <p class="intro-text">İşbu belge ile, aşağıda imzaları bulunan tarafların sevgilerinin sonsuza dek süreceği, tüm zorluklara birlikte göğüs gerecekleri ve her yeni güne birlikte uyanacakları, şüpheye yer bırakmayacak şekilde tasdik edilir.</p>
+                            
+                            <div class="couple-names">
+                                <h1>Sinan Soytürk & <span id="partner-name-display"></span></h1>
+                            </div>
+                            
+                            <p class="articles-title">Tarafların Mutabık Kaldığı Maddeler:</p>
+                            <ul id="contract-summary-list"></ul>
+    
+                            <div class="signatures">
+                                <div class="signature-block">
+                                    <div class="signature-line" id="partner-signature-display"></div>
+                                    <div class="signature-title">Tarafın İmzası</div>
+                                </div>
+                                <div class="signature-block">
+                                    <div class="seal-area">
+                                        <div class="wax-seal">S</div>
+                                        <div class="signature-paw">🐾</div>
+                                    </div>
+                                    <div class="signature-title">Tasdik Mührü</div>
+                                </div>
+                            </div>
+    
+                            <div class="certificate-date">
+                                Tarih: <span id="cert-date"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="celebrate-btn" class="app-button">Seni Çok Seviyorum!</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
