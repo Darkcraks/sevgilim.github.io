@@ -267,6 +267,227 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- OYUN FONKSİYONLARI ---
+    let gameScore = 0;
+    let gameActive = false;
+    let gameInterval;
+    let heartCount = 0;
+
+    function startHeartsGame() {
+        gameScore = 0;
+        gameActive = true;
+        heartCount = 0;
+        document.getElementById('game-score').textContent = `Skor: ${gameScore}`;
+        document.getElementById('start-hearts-game').style.display = 'none';
+        document.getElementById('game-message').textContent = 'Kalpleri yakala! 💕';
+        
+        gameInterval = setInterval(createFallingHeart, 1000);
+        
+        setTimeout(() => {
+            if (gameActive) {
+                endGame();
+            }
+        }, 15000); // 15 saniye oyun süresi
+    }
+
+    function createFallingHeart() {
+        if (!gameActive) return;
+        
+        const gameCanvas = document.getElementById('game-canvas');
+        const heart = document.createElement('div');
+        heart.className = 'falling-heart';
+        heart.textContent = ['💖', '💝', '💕', '💗', '💘'][Math.floor(Math.random() * 5)];
+        heart.style.left = Math.random() * (gameCanvas.offsetWidth - 50) + 'px';
+        heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        
+        heart.addEventListener('click', () => {
+            if (gameActive) {
+                gameScore++;
+                heartCount++;
+                document.getElementById('game-score').textContent = `Skor: ${gameScore}`;
+                heart.remove();
+                
+                // Parçacık efekti
+                createHeartParticles(heart.offsetLeft, heart.offsetTop);
+                
+                if (gameScore >= 10) {
+                    endGame(true);
+                }
+            }
+        });
+        
+        gameCanvas.appendChild(heart);
+        
+        setTimeout(() => {
+            if (heart.parentNode) {
+                heart.remove();
+            }
+        }, 5000);
+    }
+
+    function createHeartParticles(x, y) {
+        for (let i = 0; i < 5; i++) {
+            const particle = document.createElement('div');
+            particle.textContent = '✨';
+            particle.style.position = 'absolute';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.fontSize = '1em';
+            particle.style.pointerEvents = 'none';
+            particle.style.animation = `particleFloat 1s ease-out forwards`;
+            particle.style.animationDelay = (i * 0.1) + 's';
+            
+            document.getElementById('game-canvas').appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 1000);
+        }
+    }
+
+    function endGame(won = false) {
+        gameActive = false;
+        clearInterval(gameInterval);
+        document.querySelectorAll('.falling-heart').forEach(heart => heart.remove());
+        
+        if (won) {
+            document.getElementById('game-message').innerHTML = '🎉 Tebrikler! Aşkımız kazandı! 🎉';
+            setTimeout(() => showStep(6), 2000);
+        } else {
+            document.getElementById('game-message').innerHTML = `Oyun bitti! ${gameScore} kalp yakaladın ❤️`;
+            document.getElementById('start-hearts-game').style.display = 'inline-block';
+            document.getElementById('start-hearts-game').textContent = 'Tekrar Oyna';
+        }
+    }
+
+    // --- KONFETTI VE KUTLAMA FONKSİYONLARI ---
+    function createConfetti() {
+        if (typeof confetti !== 'undefined') {
+            // Canvas confetti kütüphanesi varsa onu kullan
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#e91e63', '#ff6b9d', '#ffc1cc', '#ffb3ba']
+            });
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#e91e63', '#ff6b9d', '#ffc1cc']
+                });
+            }, 200);
+            
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#e91e63', '#ff6b9d', '#ffc1cc']
+                });
+            }, 400);
+        } else {
+            // Manuel konfetti
+            createManualConfetti();
+        }
+    }
+
+    function createManualConfetti() {
+        for (let i = 0; i < 50; i++) {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.className = 'confetti-particle';
+            confettiPiece.style.left = Math.random() * 100 + 'vw';
+            confettiPiece.style.backgroundColor = ['#e91e63', '#ff6b9d', '#ffc1cc', '#ffb3ba'][Math.floor(Math.random() * 4)];
+            confettiPiece.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
+            confettiPiece.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(confettiPiece);
+            
+            setTimeout(() => {
+                confettiPiece.remove();
+            }, 5000);
+        }
+    }
+
+    // Sertifika indirme fonksiyonu
+    function downloadCertificate() {
+        const certificate = document.getElementById('certificate');
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // HTML2Canvas alternatifi - basit text tabanlı görsel
+        canvas.width = 800;
+        canvas.height = 600;
+        
+        // Arka plan
+        ctx.fillStyle = '#fffdf9';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Başlık
+        ctx.fillStyle = '#e91e63';
+        ctx.font = 'bold 32px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('AŞK YEMİNİ SERTİFİKASI', canvas.width/2, 100);
+        
+        // İsimler
+        ctx.font = 'bold 24px cursive';
+        ctx.fillText(`Sinan Soytürk & ${partnerName}`, canvas.width/2, 200);
+        
+        // Tarih
+        ctx.font = '16px serif';
+        ctx.fillStyle = '#666';
+        ctx.fillText(`Tarih: ${new Date().toLocaleDateString('tr-TR')}`, canvas.width/2, 500);
+        
+        // İndir
+        const link = document.createElement('a');
+        link.download = 'ask-yemini-sertifikamiz.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    // Event listeners
+    if (celebrateBtn) {
+        celebrateBtn.addEventListener('click', () => {
+            createConfetti();
+            celebrateBtn.textContent = '🎉 Seni Sonsuza Dek Seviyorum! 🎉';
+            celebrateBtn.style.animation = 'celebrateGlow 1s infinite alternate';
+        });
+    }
+
+    const downloadBtn = document.getElementById('download-certificate');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', downloadCertificate);
+    }
+
+    // CSS animasyonları dinamik ekleme
+    const additionalStyles = document.createElement('style');
+    additionalStyles.textContent = `
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes particleFloat {
+            0% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translate(${Math.random() * 100 - 50}px, -50px) scale(0.5); 
+                opacity: 0; 
+            }
+        }
+    `;
+    document.head.appendChild(additionalStyles);
+
     // İlk adımı başlat
     showStep(0);
 });

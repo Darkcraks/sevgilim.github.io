@@ -77,7 +77,16 @@
         <!-- Adım 5: Oyun Alanı -->
         <div id="step-5" class="step">
             <div id="game-zone-container">
-                <!-- Oyun kartları JS ile buraya eklenecek -->
+                <div class="content-card">
+                    <h2>💝 Aşk Oyunu: Kalpleri Yakala 💝</h2>
+                    <p id="game-score">Skor: 0</p>
+                    <div id="hearts-game-area">
+                        <div id="game-canvas"></div>
+                        <div id="game-message">Düşen kalpleri yakala! 10 kalp yakalayınca sürpriz!</div>
+                    </div>
+                    <button id="start-hearts-game" class="app-button">Oyunu Başlat</button>
+                    <button id="skip-game" class="app-button secondary">Oyunu Geç</button>
+                </div>
             </div>
         </div>
 
@@ -86,40 +95,52 @@
             <div id="certificate-wrapper">
                 <div id="certificate">
                     <div class="certificate-border">
+                        <div class="cert-ornament top-left">🌹</div>
+                        <div class="cert-ornament top-right">🌹</div>
+                        <div class="cert-ornament bottom-left">💝</div>
+                        <div class="cert-ornament bottom-right">💝</div>
+                        
                         <div class="certificate-content">
                             <div class="certificate-watermark"></div>
-                            <span class="cert-title-top">Resmi Aşk Beyanı</span>
+                            <span class="cert-title-top">✨ Resmi Aşk Beyanı ✨</span>
                             <h2>AŞK YEMİNİ SERTİFİKASI</h2>
                             <p class="intro-text">İşbu belge ile, aşağıda imzaları bulunan tarafların sevgilerinin sonsuza dek süreceği, tüm zorluklara birlikte göğüs gerecekleri ve her yeni güne birlikte uyanacakları, şüpheye yer bırakmayacak şekilde tasdik edilir.</p>
                             
                             <div class="couple-names">
-                                <h1>Sinan Soytürk & <span id="partner-name-display"></span></h1>
+                                <h1>💕 Sinan Soytürk & <span id="partner-name-display"></span> 💕</h1>
                             </div>
                             
-                            <p class="articles-title">Tarafların Mutabık Kaldığı Maddeler:</p>
+                            <p class="articles-title">📜 Tarafların Mutabık Kaldığı Maddeler:</p>
                             <ul id="contract-summary-list"></ul>
     
                             <div class="signatures">
                                 <div class="signature-block">
-                                    <div class="signature-line" id="partner-signature-display"></div>
-                                    <div class="signature-title">Tarafın İmzası</div>
+                                    <div class="signature-line shimmer-effect" id="partner-signature-display"></div>
+                                    <div class="signature-title">Sevgilimin İmzası</div>
                                 </div>
                                 <div class="signature-block">
                                     <div class="seal-area">
-                                        <div class="wax-seal">S</div>
+                                        <div class="wax-seal pulse-glow">S</div>
                                         <div class="signature-paw">🐾</div>
                                     </div>
-                                    <div class="signature-title">Tasdik Mührü</div>
+                                    <div class="signature-title">Resmi Tasdik Mührü</div>
                                 </div>
                             </div>
     
                             <div class="certificate-date">
-                                Tarih: <span id="cert-date"></span>
+                                📅 Tarih: <span id="cert-date"></span>
+                            </div>
+                            
+                            <div class="certificate-footer">
+                                <p style="font-style: italic; color: #888; margin-top: 20px;">
+                                    "Aşk, iki kişinin aynı yöne bakması değil, birbirlerine bakarak aynı şeyi görmesidir."
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button id="celebrate-btn" class="app-button">Seni Çok Seviyorum!</button>
+                <button id="celebrate-btn" class="app-button">🎉 Seni Sonsuza Dek Seviyorum! 🎉</button>
+                <button id="download-certificate" class="app-button secondary">📄 Sertifikayı İndir</button>
             </div>
         </div>
     </div>

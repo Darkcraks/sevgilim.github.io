@@ -72,9 +72,40 @@ body {
 /* OYUNLAR */
 .game-card { max-width: 500px; }
 #game-zone-message { font-size: 1.2em; }
-#catch-hearts-game { position: relative; height: 400px; background: rgba(255,255,255,0.5); border-radius: 10px; overflow: hidden; margin-top: 15px; }
-.falling-heart { position: absolute; font-size: 2em; cursor: pointer; user-select: none; animation: fall linear infinite; }
-@keyframes fall { to { transform: translateY(450px) rotate(360deg); } }
+#catch-hearts-game {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, #ffeef5, #ffe0ec);
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 3px dashed var(--accent-color);
+}
+.falling-heart {
+    position: absolute;
+    font-size: 2.5em;
+    cursor: pointer;
+    user-select: none;
+    animation: heartFall linear;
+    z-index: 5;
+    transition: transform 0.2s;
+}
+.falling-heart:hover {
+    transform: scale(1.2);
+}
+@keyframes heartFall {
+    from {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    to {
+        transform: translateY(450px) rotate(360deg);
+        opacity: 0.7;
+    }
+}
 #game-info { font-size: 1.5em; font-weight: bold; margin: 10px; }
 #scrambled-word { display: flex; gap: 10px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
 .letter-tile { background: white; padding: 15px; border-radius: 5px; font-size: 1.5em; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -82,31 +113,184 @@ body {
 
 /* SERTİFİKA */
 #certificate-wrapper { max-width: 800px; }
-#certificate { background: #fffdf9; width: 100%; padding: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 1px solid #e0c8b0; }
-.certificate-border { border: 2px solid #c9a888; padding: 25px 40px; position: relative; }
-.certificate-content { position: relative; z-index: 2; }
-.certificate-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20em; color: var(--bg-color-1); opacity: 0.5; z-index: 1; content: '❤️'; }
-.cert-title-top { font-family: var(--font-serif); font-size: 1.2em; color: #888; }
-.certificate-content h2 { font-family: var(--font-serif); font-size: 2.5em; color: #333; margin: 0; }
-.intro-text { font-style: italic; margin: 20px 0; }
-.couple-names h1 { font-family: var(--font-cursive); font-size: 4em; color: var(--accent-color); margin: 10px 0 30px 0; }
-.articles-title { font-family: var(--font-serif); font-size: 1.5em; text-align: left; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-#contract-summary-list { list-style: none; padding: 0; margin-top: 15px; text-align: left; }
-#contract-summary-list li { margin-bottom: 10px; padding-left: 25px; position: relative; font-size: 1.1em; }
-#contract-summary-list li::before { content: '✓'; color: var(--yes-color); position: absolute; left: 0; font-weight: bold; }
-.signatures { display: flex; justify-content: space-around; margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; }
-.signature-block { text-align: center; width: 45%; }
-.signature-line { font-family: var(--font-cursive); font-size: 1.8em; border-bottom: 1px solid var(--primary-text); min-height: 40px; }
-.seal-area { display: flex; justify-content: center; align-items: center; gap: 15px; min-height: 40px; padding-bottom: 5px; border-bottom: 1px solid transparent; }
-.wax-seal { background: var(--accent-dark); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-family: var(--font-serif); font-size: 1.8em; font-weight: bold; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
-.signature-paw { font-size: 2.5em; }
-.signature-title { font-size: 0.9em; color: #888; margin-top: 5px; }
-.certificate-date { margin-top: 30px; font-style: italic; }
+#certificate {
+    background: linear-gradient(135deg, #fffdf9, #faf8f3);
+    border: 5px solid #c9a888;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.certificate-border {
+    border: 3px double #c9a888;
+    padding: 40px;
+    position: relative;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+}
+.certificate-content { position: relative; z-index: 2; text-align: center; }
+.certificate-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15em;
+    opacity: 0.05;
+    z-index: 1;
+    pointer-events: none;
+}
+.certificate-watermark::before { content: '💕'; }
+.cert-ornament {
+    position: absolute;
+    font-size: 3em;
+    opacity: 0.3;
+    color: var(--accent-color);
+}
+.cert-ornament.top-left { top: 20px; left: 20px; }
+.cert-ornament.top-right { top: 20px; right: 20px; }
+.cert-ornament.bottom-left { bottom: 20px; left: 20px; }
+.cert-ornament.bottom-right { bottom: 20px; right: 20px; }
+.couple-names {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(233, 30, 99, 0.05);
+    border-radius: 15px;
+    border: 2px solid rgba(233, 30, 99, 0.2);
+}
+.couple-names h1 {
+    background: linear-gradient(45deg, var(--accent-color), #ff6b9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+.signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid #ddd;
+    align-items: end;
+}
+.signature-line {
+    font-family: var(--font-cursive);
+    font-size: 2.2em;
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--primary-text);
+    min-height: 50px;
+    display: flex;
+    align-items: end;
+    padding-bottom: 5px;
+    background: linear-gradient(45deg, transparent 40%, rgba(233, 30, 99, 0.1) 60%);
+}
+.wax-seal {
+    background: radial-gradient(circle, var(--accent-dark), var(--accent-color));
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-serif);
+    font-size: 2.2em;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 3px solid #8b0000;
+    position: relative;
+}
+.wax-seal::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 30%, rgba(255,255,255,0.3) 70%);
+    top: -5px;
+    left: -5px;
+}
+#celebrate-btn {
+    background: linear-gradient(45deg, var(--accent-color), #ff6b9d);
+    font-size: 1.3em;
+    padding: 20px 50px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    animation: celebrateGlow 2s infinite alternate;
+}
+@keyframes celebrateGlow {
+    from {
+        box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    }
+    to {
+        box-shadow: 0 12px 35px rgba(233, 30, 99, 0.6);
+    }
+}
 
+/* KONFETTI ANIMASYON */
+.confetti-particle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-color);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* MOBİL UYUMLULUK GELİŞTİRME */
 @media (max-width: 600px) {
     #letter-card, .content-card, #contract-card, #certificate-wrapper { padding: 25px 20px; }
     .proposal-title { font-size: 2.2em; }
     .couple-names h1 { font-size: 2.5em; }
     .certificate-content h2 { font-size: 1.8em; }
     .signatures { flex-direction: column; align-items: center; gap: 30px; }
+    
+    .couple-names h1 {
+        font-size: 2em;
+        line-height: 1.2;
+    }
+    
+    .certificate-border {
+        padding: 20px 15px;
+    }
+    
+    .wax-seal {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8em;
+    }
+    
+    #hearts-game-area {
+        height: 300px;
+    }
+    
+    .falling-heart {
+        font-size: 2em;
+    }
+}
+
+/* YENİ ANIMASYONLAR */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.pulse-glow {
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(233, 30, 99, 0.8);
+    }
 }
