@@ -80,11 +80,12 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.8s ease-in-out, visibility 0.8s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
     z-index: 1;
+    
+    /* Enable scrolling for all screens */
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .screen.active {
@@ -96,15 +97,21 @@ body {
 .content-wrapper {
     width: 100%;
     max-width: 1200px;
+    min-height: 100%; /* Take full height to allow vertical centering */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px; /* Add padding to prevent content touching edges */
+    box-sizing: border-box;
     text-align: center;
     position: relative;
 }
 
+/* Remove old scrollable class as it's now handled by screen/wrapper */
 .scrollable {
-    overflow-y: auto;
-    height: 100%;
-    padding-top: 80px; /* Space for header/nav if needed */
-    display: block;
+    display: flex; /* Keep flex behavior from content-wrapper */
 }
 
 /* Typography */

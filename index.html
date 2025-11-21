@@ -193,31 +193,33 @@
 
     <!-- Screen 5: Flight Animation -->
     <section id="flight-screen" class="screen">
-        <div class="map-container">
-            <div class="turkey-map-bg"></div>
-            
-            <div class="map-point trabzon">
-                <div class="pin"></div>
-                <div class="pulse"></div>
-                <span class="city-label">Trabzon</span>
+        <div class="content-wrapper">
+            <div class="map-container">
+                <div class="turkey-map-bg"></div>
+                
+                <div class="map-point trabzon">
+                    <div class="pin"></div>
+                    <div class="pulse"></div>
+                    <span class="city-label">Trabzon</span>
+                </div>
+                <div class="map-point igdir">
+                    <div class="pin"></div>
+                    <div class="pulse"></div>
+                    <span class="city-label">Iğdır</span>
+                </div>
+                
+                <svg class="flight-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <!-- Path will be calculated in JS to match map points -->
+                    <path id="flight-path" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="0.5" stroke-dasharray="2,2" />
+                    <path id="flight-progress" fill="none" stroke="#ff6b9d" stroke-width="0.8" filter="drop-shadow(0 0 1px #ff6b9d)" />
+                </svg>
+                
+                <div id="plane-icon" class="plane-icon">✈️</div>
             </div>
-            <div class="map-point igdir">
-                <div class="pin"></div>
-                <div class="pulse"></div>
-                <span class="city-label">Iğdır</span>
+            <div class="flight-status">
+                <p>Trabzon'dan Iğdır'a Aşk Yolculuğu...</p>
+                <p class="distance"><span id="distance-counter">0</span> km</p>
             </div>
-            
-            <svg class="flight-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <!-- Path will be calculated in JS to match map points -->
-                <path id="flight-path" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="0.5" stroke-dasharray="2,2" />
-                <path id="flight-progress" fill="none" stroke="#ff6b9d" stroke-width="0.8" filter="drop-shadow(0 0 1px #ff6b9d)" />
-            </svg>
-            
-            <div id="plane-icon" class="plane-icon">✈️</div>
-        </div>
-        <div class="flight-status">
-            <p>Trabzon'dan Iğdır'a Aşk Yolculuğu...</p>
-            <p class="distance"><span id="distance-counter">0</span> km</p>
         </div>
     </section>
 
