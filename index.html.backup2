@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hicran'a Özel 💕</title>
+    <meta name="description" content="Trabzon'dan Iğdır'a sevgiyle...">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Açılış Ekranı - Hediye Kutusu -->
+    <div id="welcome-screen" class="screen active">
+        <div class="particles-bg"></div>
+        <div class="gradient-overlay"></div>
+        
+        <!-- Çiçekler ve Böcekler -->
+        <div class="flowers-container">
+            <!-- Güller -->
+            <div class="flower rose" style="top: 10%; left: 5%; animation-delay: 0s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower rose" style="top: 70%; right: 10%; animation-delay: 2s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <!-- Papatyalar -->
+            <div class="flower daisy" style="top: 15%; right: 15%; animation-delay: 1s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <div class="flower daisy" style="bottom: 15%; left: 10%; animation-delay: 3s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <!-- Laleler -->
+            <div class="flower tulip" style="top: 60%; left: 8%; animation-delay: 1.5s;">
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-stem"></div>
+            </div>
+            
+            <div class="flower tulip" style="top: 25%; right: 8%; animation-delay: 2.5s;">
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-stem"></div>
+            </div>
+            
+            <!-- Kelebekler -->
+            <div class="butterfly" style="top: 20%; left: 20%; animation-delay: 0s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 50%; left: 60%; animation-delay: 5s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <!-- Arılar -->
+            <div class="bee" style="top: 30%; left: 10%; animation-delay: 2s;">
+                <div class="bee-head"></div>
+                <div class="bee-body"></div>
+                <div class="bee-wing left"></div>
+                <div class="bee-wing right"></div>
+                <div class="bee-stinger"></div>
+            </div>
+        </div>
+        
+        <div class="gift-container">
+            <div class="welcome-header fade-in">
+                <h1 class="elegant-title">Hicran'a Özel</h1>
+                <div class="title-underline"></div>
+                <p class="elegant-subtitle">Sana özel bir hediyem var...</p>
+            </div>
+            
+            <div class="gift-box-wrapper" id="gift-box-wrapper">
+                <div class="gift-glow"></div>
+                <div class="gift-box" id="gift-box">
+                    <div class="gift-lid">
+                        <div class="lid-top"></div>
+                        <div class="ribbon-bow">
+                            <div class="bow-left"></div>
+                            <div class="bow-right"></div>
+                            <div class="bow-center"></div>
+                        </div>
+                    </div>
+                    <div class="gift-base">
+                        <div class="ribbon-vertical"></div>
+                        <div class="ribbon-horizontal"></div>
+                        <div class="box-shine"></div>
+                        <div class="box-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="gift-hint fade-in-delay-2">
+                <span class="hint-icon">✨</span>
+                Hediyeni açmak için kutuya dokun
+                <span class="hint-icon">✨</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Bizim Hikayemiz Ekranı -->
+    <div id="our-story-screen" class="screen">
+        <div class="particles-bg"></div>
+        <div class="gradient-overlay"></div>
+        
+        <!-- Çiçekler -->
+        <div class="flowers-container">
+            <div class="flower rose" style="top: 8%; left: 5%; animation-delay: 0s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower rose" style="top: 10%; right: 8%; animation-delay: 2s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 40%; left: 15%; animation-delay: 1s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 50%; right: 20%; animation-delay: 5s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+        </div>
+        
+        <div class="story-container">
+            <div class="story-header">
+                <h2 class="elegant-title">Bizim Hikayemiz</h2>
+                <div class="title-underline"></div>
+                <p class="elegant-subtitle">Her şeyin başladığı o güzel anlar...</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- İlk Tanışma -->
+                <div class="timeline-item" data-index="0">
+                    <div class="timeline-icon">💕</div>
+                    <div class="timeline-card">
+                        <div class="card-glow"></div>
+                        <div class="timeline-date">17 Haziran 2024</div>
+                        <h3 class="timeline-title">İlk Tanışma</h3>
+                        <p class="timeline-text">
+                            Birbirimizi tanıdığımız o muhteşem gün... 17 Haziran'da yollarımız kesişti 
+                            ve her şey o anda başladı. İlk görüşte aşk gerçekmiş, sen bana bunu 
+                            kanıtladın. Gözlerine baktığım ilk an, kalbim senin oldu.
+                        </p>
+                        <div class="timeline-emoji">✨</div>
+                    </div>
+                </div>
+                
+                <!-- Özel Bağ -->
+                <div class="timeline-item" data-index="1">
+                    <div class="timeline-icon">🌟</div>
+                    <div class="timeline-card">
+                        <div class="card-glow"></div>
+                        <div class="timeline-date">Yeni Bir Yol</div>
+                        <h3 class="timeline-title">Birlikte Bir Yolculuk</h3>
+                        <p class="timeline-text">
+                            17 Haziran'da bir yola girdik birlikte. Bu yol bazen zordu, 
+                            bazen güzeldi ama her zaman seninleydi. Her adımda, her nefeste 
+                            seninle olmak ne kadar değerli anladım. Bu yolda seninle yürümek 
+                            hayatımın en güzel kararı.
+                        </p>
+                        <div class="timeline-emoji">🛤️</div>
+                    </div>
+                </div>
+                
+                <!-- Doğum Günleri -->
+                <div class="timeline-item" data-index="2">
+                    <div class="timeline-icon">🎂</div>
+                    <div class="timeline-card">
+                        <div class="card-glow"></div>
+                        <div class="timeline-date">10 Temmuz & 11 Ocak</div>
+                        <h3 class="timeline-title">Özel Günlerimiz</h3>
+                        <p class="timeline-text">
+                            Sen 10 Temmuz'da dünyaya geldin ve dünyayı güzelleştirdin. 
+                            Ben 11 Ocak'ta doğdum, seni bulabilmek için. İki farklı mevsim, 
+                            iki farklı gün ama aynı kalp. Senin doğum günün benim için 
+                            bir bayram, seninle her gün kutlama gibi.
+                        </p>
+                        <div class="timeline-emoji">🎉</div>
+                    </div>
+                </div>
+                
+                <!-- Bugün -->
+                <div class="timeline-item" data-index="3">
+                    <div class="timeline-icon">❤️</div>
+                    <div class="timeline-card">
+                        <div class="card-glow"></div>
+                        <div class="timeline-date">7 Kasım 2025</div>
+                        <h3 class="timeline-title">Bugün ve Sonsuza...</h3>
+                        <p class="timeline-text">
+                            İşte bugün, sana olan sevgimi tekrar hatırlatıyorum. 
+                            495 kilometre uzaktayız ama kalbimde hep yanımdasın. 
+                            Her gün seni daha çok seviyorum. Trabzon'dan Iğdır'a, 
+                            kalbimden kalbine uzanan bu sevgi hiç bitmeyecek.
+                        </p>
+                        <div class="timeline-emoji">💖</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="continue-to-letters" class="story-btn">
+                <span class="btn-text">Mektuplarıma Geç</span>
+                <span class="btn-icon">💌</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mektup Seçim Ekranı -->
+    <div id="letter-select-screen" class="screen">
+        <div class="particles-bg"></div>
+        <div class="gradient-overlay"></div>
+        
+        <!-- Çiçekler -->
+        <div class="flowers-container">
+            <div class="flower rose" style="top: 5%; left: 3%; animation-delay: 0.5s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower daisy" style="top: 80%; right: 5%; animation-delay: 1.5s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 40%; left: 80%; animation-delay: 3s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+        </div>
+        
+        <div class="letter-select-container">
+            <div class="section-header">
+                <h2 class="elegant-title">Aşk Mektupları</h2>
+                <div class="title-underline"></div>
+                <p class="elegant-subtitle">Sana yazdığım satırlar... Hangisini okumak istersin?</p>
+            </div>
+            
+            <div class="letters-grid">
+                <div class="letter-card" data-letter="1">
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <div class="letter-icon">💕</div>
+                        <h3 class="letter-title">İlk Görüşümüz</h3>
+                        <p class="letter-preview">Seni ilk gördüğüm o anı hiç unutamıyorum...</p>
+                        <div class="card-footer">
+                            <span class="read-btn">Oku</span>
+                            <span class="letter-emoji">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card" data-letter="2">
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <div class="letter-icon">🌙</div>
+                        <h3 class="letter-title">Gece Düşünceleri</h3>
+                        <p class="letter-preview">Her gece yıldızlara bakarken seni düşünüyorum...</p>
+                        <div class="card-footer">
+                            <span class="read-btn">Oku</span>
+                            <span class="letter-emoji">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card" data-letter="3">
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <div class="letter-icon">🗺️</div>
+                        <h3 class="letter-title">495 Kilometre</h3>
+                        <p class="letter-preview">Aramızdaki mesafe sadece bir sayı...</p>
+                        <div class="card-footer">
+                            <span class="read-btn">Oku</span>
+                            <span class="letter-emoji">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card" data-letter="4">
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <div class="letter-icon">❤️</div>
+                        <h3 class="letter-title">Seni Sevme Nedenim</h3>
+                        <p class="letter-preview">Seni neden seviyorum biliyor musun?...</p>
+                        <div class="card-footer">
+                            <span class="read-btn">Oku</span>
+                            <span class="letter-emoji">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card" data-letter="5">
+                    <div class="card-shine"></div>
+                    <div class="card-content">
+                        <div class="letter-icon">🌟</div>
+                        <h3 class="letter-title">Hayallerimiz</h3>
+                        <p class="letter-preview">Seninle kuracağımız gelecek...</p>
+                        <div class="card-footer">
+                            <span class="read-btn">Oku</span>
+                            <span class="letter-emoji">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mektup Okuma Ekranı -->
+    <div id="letter-read-screen" class="screen">
+        <div class="particles-bg"></div>
+        <div class="gradient-overlay"></div>
+        
+        <!-- Romantik Çiçekler -->
+        <div class="flowers-container">
+            <div class="flower rose" style="top: 8%; left: 5%; animation-delay: 0.5s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower rose" style="top: 12%; right: 8%; animation-delay: 1.5s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 50%; left: 10%; animation-delay: 2s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+        </div>
+        
+        <div class="letter-read-container">
+            <div class="paper-wrapper">
+                <div class="paper-envelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-letter">
+                        <div class="letter-paper">
+                            <div class="paper-texture"></div>
+                            <div class="letter-header">
+                                <h3 id="letter-title" class="letter-main-title">Mektup Başlığı</h3>
+                                <div class="header-divider"></div>
+                                <p class="letter-date">Trabzon'dan sevgiyle, 7 Kasım 2025</p>
+                            </div>
+                            <div class="letter-body" id="letter-content">
+                                <!-- Mektup içeriği -->
+                            </div>
+                            <div class="letter-footer">
+                                <div class="signature-line"></div>
+                                <p class="signature-text">Seni çok seven,</p>
+                                <p class="signature-name">Senin Trabzonlun</p>
+                                <div class="signature-heart">💕</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="envelope-flap"></div>
+                </div>
+            </div>
+            <button id="continue-journey" class="elegant-btn">
+                <span class="btn-text">Yolculuğa Çık</span>
+                <span class="btn-icon">✈️</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Uçak Yolculuğu Ekranı -->
+    <div id="flight-screen" class="screen">
+        <div class="sky-background"></div>
+        
+        <!-- Uçan Kelebekler -->
+        <div class="flowers-container">
+            <div class="butterfly" style="top: 15%; left: 10%; animation-delay: 1s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 65%; right: 15%; animation-delay: 5s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="bee" style="top: 40%; left: 70%; animation-delay: 2s;">
+                <div class="bee-head"></div>
+                <div class="bee-body"></div>
+                <div class="bee-wing left"></div>
+                <div class="bee-wing right"></div>
+                <div class="bee-stinger"></div>
+            </div>
+        </div>
+        
+        <div class="flight-container">
+            <h2 class="flight-title">Trabzon'dan Iğdır'a Yolculuk ✈️</h2>
+            
+            <div class="turkey-map">
+                <!-- Trabzon -->
+                <div class="city-point trabzon-point" id="trabzon-marker">
+                    <div class="city-pin">�</div>
+                    <div class="city-label">Trabzon</div>
+                </div>
+                
+                <!-- Uçak -->
+                <div class="airplane" id="airplane">
+                    <div class="plane-body">
+                        <svg class="plane-svg" viewBox="0 0 100 100">
+                            <path d="M50 10 L70 40 L90 45 L70 50 L90 55 L70 60 L50 90 L30 60 L10 55 L30 50 L10 45 L30 40 Z" 
+                                  fill="#ff6b9d" 
+                                  stroke="#fff" 
+                                  stroke-width="2"/>
+                            <circle cx="50" cy="50" r="5" fill="#fff"/>
+                        </svg>
+                    </div>
+                    <div class="plane-trail"></div>
+                </div>
+                
+                <!-- Iğdır -->
+                <div class="city-point igdir-point" id="igdir-marker">
+                    <div class="city-pin">📍</div>
+                    <div class="city-label">Iğdır</div>
+                </div>
+                
+                <!-- Uçuş Yolu -->
+                <svg class="flight-path" viewBox="0 0 800 400">
+                    <path id="flight-route" d="M 100 150 Q 400 100 700 200" 
+                          stroke="#ff6b9d" 
+                          stroke-width="2" 
+                          stroke-dasharray="5,5" 
+                          fill="none"/>
+                </svg>
+            </div>
+            
+            <div class="flight-info" id="flight-info">
+                <p class="flight-status">Uçuş başlıyor...</p>
+                <div class="distance-counter">
+                    <span id="distance-count">0</span> km
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Varış Ekranı -->
+    <div id="arrival-screen" class="screen">
+        <div class="particles-bg"></div>
+        <div class="gradient-overlay"></div>
+        
+        <!-- Çiçek Bahçesi -->
+        <div class="flowers-container">
+            <div class="flower rose" style="bottom: 10%; left: 10%; animation-delay: 0s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower rose" style="bottom: 15%; right: 12%; animation-delay: 1s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower tulip" style="bottom: 12%; left: 20%; animation-delay: 0.5s;">
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-stem"></div>
+            </div>
+            
+            <div class="flower tulip" style="bottom: 18%; right: 25%; animation-delay: 1.5s;">
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-petal"></div>
+                <div class="tulip-stem"></div>
+            </div>
+            
+            <div class="flower daisy" style="bottom: 8%; left: 35%; animation-delay: 2s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 25%; left: 15%; animation-delay: 1s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 30%; right: 20%; animation-delay: 6s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="bee" style="top: 35%; left: 70%; animation-delay: 3s;">
+                <div class="bee-head"></div>
+                <div class="bee-body"></div>
+                <div class="bee-wing left"></div>
+                <div class="bee-wing right"></div>
+                <div class="bee-stinger"></div>
+            </div>
+        </div>
+        
+        <div class="arrival-container">
+            <div class="arrival-header">
+                <h2 class="elegant-title">Varış: Iğdır</h2>
+                <div class="title-underline"></div>
+                <p class="elegant-subtitle">Yolculuk tamamlandı 🛬</p>
+            </div>
+            
+            <div class="character-scene">
+                <div class="scene-background">
+                    <div class="mountain mountain-1"></div>
+                    <div class="mountain mountain-2"></div>
+                    <div class="sun-glow"></div>
+                </div>
+                
+                <div class="girl-character" id="girl-character">
+                    <div class="character-glow"></div>
+                    <div class="character-avatar">
+                        <div class="avatar-circle">
+                            <div class="avatar-face">
+                                <div class="avatar-eyes">
+                                    <span class="eye">✨</span>
+                                    <span class="eye">✨</span>
+                                </div>
+                                <div class="avatar-smile">💕</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-info">
+                        <p class="character-name">Hicran</p>
+                        <p class="character-greeting">Seni bekliyorum...</p>
+                    </div>
+                    <div class="interaction-hint">
+                        <div class="hint-pulse"></div>
+                        <span class="hint-text">Dokun</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="arrival-quote">
+                "495 kilometre yolculuk bitti, şimdi sana ulaşma zamanı..."
+            </p>
+        </div>
+    </div>
+
+    <!-- Final Mesaj Ekranı -->
+    <div id="final-message-screen" class="screen">
+        <div class="stars"></div>
+        
+        <!-- Romantik Çiçek Yağmuru -->
+        <div class="flowers-container">
+            <div class="flower rose" style="top: 10%; left: 15%; animation-delay: 0s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower rose" style="top: 15%; right: 10%; animation-delay: 2s;">
+                <div class="rose-petals">
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                    <div class="rose-petal"></div>
+                </div>
+                <div class="rose-center"></div>
+            </div>
+            
+            <div class="flower daisy" style="top: 70%; left: 8%; animation-delay: 1s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <div class="flower daisy" style="bottom: 10%; right: 12%; animation-delay: 3s;">
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-petal"></div>
+                <div class="daisy-center"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 35%; left: 25%; animation-delay: 2s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+            
+            <div class="butterfly" style="top: 45%; right: 30%; animation-delay: 7s;">
+                <div class="butterfly-wing left"></div>
+                <div class="butterfly-wing right"></div>
+                <div class="butterfly-body"></div>
+                <div class="butterfly-antenna left"></div>
+                <div class="butterfly-antenna right"></div>
+            </div>
+        </div>
+        
+        <div class="final-message-container">
+            <div class="distance-reveal">
+                <h2 class="final-title">Mesafemiz...</h2>
+                
+                <div class="distance-display">
+                    <div class="distance-number">495</div>
+                    <div class="distance-unit">kilometre</div>
+                </div>
+                
+                <div class="final-text">
+                    <p class="final-quote">"Mesafemiz sadece bu kadar sayıdan ibaret..."</p>
+                    <p class="final-description">
+                        Ama sevgimiz ölçülemez. 💕<br>
+                        Kalbimde her zaman yanımdasın.<br>
+                        Trabzon'dan Iğdır'a uzanan bu yol,<br>
+                        Her gün seninle kısalıyor...
+                    </p>
+                    <div class="heart-beat">❤️</div>
+                    <p class="final-signature">Seni çok seviyorum Hicran'ım</p>
+                    <p class="final-from">- Senin Trabzonlun</p>
+                </div>
+            </div>
+            
+            <button id="restart-journey" class="main-btn pulse-btn">� Baştan Başla</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

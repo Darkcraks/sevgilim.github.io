@@ -1,0 +1,148 @@
+﻿function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+const giftBox = document.getElementById('gift-box');
+if (giftBox) {
+    giftBox.addEventListener('click', () => {
+        giftBox.classList.add('opening');
+        createConfetti();
+        setTimeout(() => showScreen('our-story-screen'), 2000);
+    });
+}
+
+const continueBtn = document.getElementById('continue-to-letters');
+if (continueBtn) continueBtn.addEventListener('click', () => showScreen('letter-select-screen'));
+
+// Zarf tıklama eventi
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    showScreen('welcome-screen');
+    
+    // Zarfları tıklanabilir yap
+    document.querySelectorAll('.envelope-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', () => {
+            const letterNum = wrapper.getAttribute('data-letter');
+            const envelope = wrapper.querySelector('.envelope');
+            
+            // Zarf animasyonu
+            envelope.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                envelope.style.transform = 'scale(1)';
+                showScreen('letter-read-screen-' + letterNum);
+            }, 200);
+        });
+    });
+    
+    // Geri dön butonları
+    document.querySelectorAll('.back-to-letters-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            showScreen('letter-select-screen');
+        });
+    });
+    
+    // Yolculuğa çık butonları
+    document.querySelectorAll('.continue-journey').forEach(btn => {
+        btn.addEventListener('click', () => {
+            startFlight();
+        });
+    });
+    
+    // Kız karakterine tıklama
+    const girlChar = document.getElementById('girl-character');
+    if (girlChar) {
+        girlChar.addEventListener('click', () => {
+            girlChar.style.transform = 'scale(1.1)';
+            createHearts();
+            setTimeout(() => {
+                girlChar.style.transform = 'scale(1)';
+                showScreen('final-message-screen');
+            }, 1000);
+        });
+    }
+    
+    // Baştan başla butonu
+    const restartBtn = document.getElementById('restart-journey');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', () => {
+            showScreen('welcome-screen');
+        });
+    }
+});
+
+function createConfetti() {
+    const c = ['#ff6b9d','#c44569','#ffd700','#ffa502'];
+    for (let i = 0; i < 100; i++) {
+        const e = document.createElement('div');
+        e.className = 'confetti';
+        e.style.left = Math.random() * 100 + '%';
+        e.style.backgroundColor = c[Math.floor(Math.random() * 4)];
+        e.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 5000);
+    }
+}
+
+function startFlight() {
+    showScreen('flight-screen');
+    const p = document.getElementById('airplane');
+    
+    // Uçak animasyonunu başlat
+    if (p) {
+        p.classList.add('flying');
+        p.style.opacity = '1';
+    }
+    
+    // Mesafe sayacı
+    const distanceEl = document.getElementById('distance-count');
+    
+    if (distanceEl) {
+        let dist = 0;
+        const interval = setInterval(() => {
+            if (dist < 495) {
+                dist += 5;
+                distanceEl.textContent = Math.min(dist, 495);
+            } else {
+                clearInterval(interval);
+            }
+        }, 40);
+    }
+    
+    // Uçuş tamamlandığında varış ekranına geç
+    setTimeout(() => {
+        showScreen('arrival-screen');
+    }, 6000);
+}
+
+function createHearts() {
+    const h = ['❤️','💕','💖','💗','💝'];
+    for (let i = 0; i < 30; i++) {
+        const e = document.createElement('div');
+        e.className = 'floating-heart-final';
+        e.textContent = h[Math.floor(Math.random() * 5)];
+        e.style.left = Math.random() * 100 + '%';
+        e.style.fontSize = (20 + Math.random() * 20) + 'px';
+        e.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 6000);
+    }
+}
+
+function createParticles() {
+    const p = document.querySelectorAll('.particles-bg')[0];
+    if (!p) return;
+    for (let i = 0; i < 50; i++) {
+        const e = document.createElement('div');
+        e.className = 'particle';
+        e.style.left = Math.random() * 100 + '%';
+        e.style.top = Math.random() * 100 + '%';
+        e.style.animationDuration = (10 + Math.random() * 10) + 's';
+        e.style.width = '4px';
+        e.style.height = '4px';
+        e.style.background = 'rgba(255, 255, 255, 0.3)';
+        e.style.borderRadius = '50%';
+        e.style.position = 'absolute';
+        p.appendChild(e);
+    }
+}

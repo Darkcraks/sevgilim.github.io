@@ -1,493 +1,435 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- ELEMENTLER ---
-    const envelope = document.getElementById('envelope');
-    const letterCard = document.getElementById('letter-card');
-    const yesButton = document.getElementById('yes-button');
-    const noButton = document.getElementById('no-button');
-    const partnerNameInput = document.getElementById('partner-name-input');
-    const submitNameBtn = document.getElementById('submit-name-btn');
-    const celebrateBtn = document.getElementById('celebrate-btn');
-    
-    // --- SÖZLEŞME ELEMENTLERİ ---
-    const clauseDisplayArea = document.getElementById('clause-display-area');
-    const progressBar = document.getElementById('contract-progress');
-    const customClauseArea = document.getElementById('custom-clause-area');
-    const showAddClauseBtn = document.getElementById('show-add-clause-btn');
-    const addCustomClauseBtn = document.getElementById('add-custom-clause-btn');
-    const finishContractBtn = document.getElementById('finish-contract-btn');
-
-    // --- GENEL DEĞİŞKENLER ---
-    let partnerName = '';
-    let contractClauses = [
-        { text: 'Her sabah "Günaydın Aşkım" mesajı atılacak.', accepted: null, type: 'predefined' },
-        { text: 'Tartışsak bile, sevgimiz her zaman kazanacak.', accepted: null, type: 'predefined' },
-        { text: 'Haftada en az bir kez baş başa kaliteli zaman geçirilecek.', accepted: null, type: 'predefined' },
-        { text: 'En zor anlarda bile birbirimizin en büyük destekçisi olunacak.', accepted: null, type: 'predefined' },
-        { text: 'Geleceğe dair hayaller birlikte kurulacak.', accepted: null, type: 'predefined' }
-    ];
-    let currentClauseIndex = 0;
-    let allClausesAnswered = false;
-
-    // --- EMAILJS AYARLARI ---
-    const EMAILJS_SERVICE_ID = 'service_qnpd30q';
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // KENDİ TEMPLATE ID'Nİ GİR
-    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';  // KENDİ PUBLIC KEY'İNİ GİR
-
-    // --- ADIM GEÇİŞ FONKSİYONU ---
-    function showStep(stepNumber) {
-        document.querySelectorAll('.step').forEach(step => {
-            step.classList.remove('active-step');
-        });
-        document.getElementById(`step-${stepNumber}`).classList.add('active-step');
+// Data for letters
+const letters = {
+    1: {
+        title: "Ayrılık Sözleri... 💔",
+        body: `<p>Hicran'ım,</p>
+        <p>"Ayrılalım" dedin, "Bitti" dedin... O an dünya başıma yıkıldı sandım. Dudaklarından dökülen her kelime kalbime bir ok gibi saplandı.</p>
+        <p>Ama biliyor musun? O an bile gözlerinin içine baktığımda, o kelimelerin arkasındaki seni gördüm. Korkularını, endişelerini, belki de çaresizliğini...</p>
+        <p><strong>Sen ne dersen de, kalbim seninle atmaktan vazgeçmedi.</strong></p>
+        <p>Bu sadece bir başlangıç. Seni bırakmaya hiç niyetim yok. Bu yolculukta sana bunu kanıtlayacağım.</p>`
+    },
+    2: {
+        title: "Bitti Desen De... 🔒",
+        body: `<p>Canım,</p>
+        <p>Bitti demekle bitmiyor işte. Kalp bir kere sevdi mi, akıl ne derse desin dinlemiyor. Sen gitmek istesen de, anılarımız, yaşanmışlıklarımız, o güzel gülüşün beni bırakmıyor.</p>
+        <p>Her gece başımı yastığa koyduğumda, "bitti" kelimesi yankılanıyor ama hemen ardından senin kokun geliyor burnuma. Ve ben yine, yeniden seni seviyorum.</p>
+        <p><strong>Mesafeler, kelimeler, engeller... Hiçbiri bizi bitiremez.</strong></p>
+        <p>Benim sevgim, senin vazgeçişlerinden çok daha güçlü.</p>`
+    },
+    3: {
+        title: "Bırakmayacağım ❤️",
+        body: `<p>Biricik Sevgilim,</p>
+        <p>Sana söz veriyorum, ne kadar zor olursa olsun, ne kadar imkansız görünürse görünsün, ben buradayım. Trabzon'dan Iğdır'a uzanan bu yol, benim sana olan inancımın yolu.</p>
+        <p>Elimi tutmasan da, yüzüme bakmasan da, ben senin gölgen gibi, koruyucu meleğin gibi hep yanında olacağım.</p>
+        <p><strong>Çünkü sen benim vazgeçilmezimsin.</strong></p>
+        <p>Bu inat değil, bu takıntı değil. Bu, saf ve gerçek bir sevgi. Ve gerçek sevgi asla pes etmez.</p>`
+    },
+    4: {
+        title: "Sonsuzluk Yemini ♾️",
+        body: `<p>Hayatımın Anlamı,</p>
+        <p>İşte buradayız. Tüm zorluklara, tüm "bitti"lere rağmen. Kalbim hala senin için çarpıyor ve biliyorum ki senin kalbinin derinliklerinde de ben varım.</p>
+        <p>Bizim hikayemiz bitmedi, daha yeni başlıyor. Sen ve ben, tüm dünyaya inat, tüm mesafelere inat, sonsuza dek...</p>
+        <p><strong>Seni seviyorum Hicran. Dün, bugün ve yarın. Asla bırakmayacağım.</strong></p>
+        <p>Şimdi, gel bu sonsuzluğa birlikte uçalım...</p>`
     }
+};
 
-    // --- OLAY DİNLEYİCİLERİ ---
-    envelope.addEventListener('click', () => {
-        envelope.querySelector('.envelope-flap').style.transform = 'rotateX(180deg)';
-        setTimeout(() => showStep(1), 800);
+// Game State
+let currentLevel = 1;
+const maxLevel = 4;
+
+// Navigation
+function navigateTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => {
+        s.classList.remove('active');
     });
-    letterCard.addEventListener('click', () => showStep(2));
-    yesButton.addEventListener('click', () => showStep(3));
-    noButton.addEventListener('mouseover', dodgeButton);
-    noButton.addEventListener('click', dodgeButton);
-    submitNameBtn.addEventListener('click', () => {
-        partnerName = partnerNameInput.value.trim();
-        if (partnerName === '') {
-            alert('Lütfen adını gir, bu anı ölümsüzleştirelim!');
-            return;
-        }
-        showStep(4);
-        renderCurrentClause();
-    });
-    showAddClauseBtn.addEventListener('click', () => customClauseArea.classList.remove('hidden'));
-    addCustomClauseBtn.addEventListener('click', addCustomClause);
+    document.getElementById(screenId).classList.add('active');
+}
 
-    // ******************************************************
-    // *** BURASI DÜZELTİLDİ ***
-    // ******************************************************
-    finishContractBtn.addEventListener('click', () => {
-        showStep(5);
-        runGameSequence(); // Oyun sekansı burada başlatılıyor.
-    });
-    // ******************************************************
-
-    celebrateBtn.addEventListener('click', () => {
-        if (typeof confetti === 'function') {
-            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-        }
-    });
-
-    // --- ANA FONKSİYONLAR ---
-    function dodgeButton() {
-        noButton.style.position = 'absolute'; // Önce pozisyonu ayarla
-        noButton.classList.add('dodging');
-        
-        // Animasyon bitince stili temizle ki tekrar doğru yerde dursun
-        noButton.addEventListener('animationend', () => {
-            noButton.classList.remove('dodging');
-            noButton.style.position = 'relative'; // Eski haline getir
-        }, { once: true });
-    }
-    
-    // --- SÖZLEŞME MANTIĞI ---
-    function renderCurrentClause() {
-        allClausesAnswered = contractClauses.filter(c => c.type === 'predefined').every(c => c.accepted !== null);
-        
-        if (allClausesAnswered) {
-            clauseDisplayArea.innerHTML = `<div class="clause-card"><p class="clause-text">Anayasa tamamlandı! İstersen kendi maddelerini ekleyebilir veya onaylayabilirsin.</p></div>`;
-            finishContractBtn.classList.remove('hidden');
-            showAddClauseBtn.classList.remove('hidden'); // Kendi maddesini ekleme opsiyonunu tekrar göster
-            return;
-        }
-
-        currentClauseIndex = contractClauses.findIndex(c => c.accepted === null && c.type === 'predefined');
-        const clause = contractClauses[currentClauseIndex];
-
-        clauseDisplayArea.innerHTML = `
-            <div class="clause-card">
-                <p class="clause-text">"${clause.text}"</p>
-                <div class="clause-buttons">
-                    <button class="app-button yes" data-answer="true">Kabul Ediyorum</button>
-                    <button class="app-button no" data-answer="false">Tekrar Düşünelim...</button>
-                </div>
-            </div>
-        `;
-
-        clauseDisplayArea.querySelectorAll('.app-button').forEach(btn => {
-            btn.addEventListener('click', (e) => handleClauseResponse(e.target.dataset.answer === 'true'));
-        });
-        
-        updateProgressBar();
-    }
-    
-    function updateProgressBar() {
-        const answeredCount = contractClauses.filter(c => c.type === 'predefined' && c.accepted !== null).length;
-        const totalPredefined = contractClauses.filter(c => c.type === 'predefined').length;
-        const progress = (answeredCount / totalPredefined) * 100;
-        progressBar.style.width = `${progress}%`;
-    }
-
-    function handleClauseResponse(isAccepted) {
-        if(currentClauseIndex !== -1) {
-            contractClauses[currentClauseIndex].accepted = isAccepted;
-            renderCurrentClause();
-        }
-    }
-
-    function addCustomClause() {
-        const input = document.getElementById('custom-clause-input');
-        const text = input.value.trim();
-        if (text) {
-            contractClauses.push({ text: text, accepted: true, type: 'custom' });
-            input.value = '';
-            customClauseArea.classList.add('hidden');
-            alert('Madden başarıyla eklendi! Anayasayı onaylayarak devam edebilirsin.');
-        }
-    }
-
-    // --- OYUN MANTIĞI ---
-    function runGameSequence() {
-        const gameZone = document.getElementById('game-zone-container');
-        gameZone.innerHTML = `
-            <div class="content-card game-card">
-                <h2>Eğlence Başlasın!</h2>
-                <p id="game-zone-message">Anayasamız hazır! Ama sonsuz mutluluğa giden yolda birkaç tatlı engel var. Hazır mısın?</p>
-                <button id="start-games-btn" class="app-button">Meydan Okumayı Kabul Ediyorum!</button>
-            </div>
-        `;
-        document.getElementById('start-games-btn').addEventListener('click', runCatchHeartsGame);
-    }
-    
-    function runCatchHeartsGame() {
-        const gameZone = document.getElementById('game-zone-container');
-        gameZone.innerHTML = `
-            <div class="content-card game-card">
-                <h2>Oyun 1: Kalp Yakalama</h2>
-                <p>10 saniyede 5 kalp yakala!</p>
-                <div id="game-info"><span id="game-timer">10</span>s | Skor: <span id="game-score">0</span></div>
-                <div id="catch-hearts-game"></div>
-            </div>
-        `;
-
-        const gameArea = document.getElementById('catch-hearts-game');
-        let score = 0;
-        let timer = 10;
-        const timerDisplay = document.getElementById('game-timer');
-        const scoreDisplay = document.getElementById('game-score');
-        let heartInterval; // Interval'i dışarıda tanımla
-
-        function createHeart() {
-            if (timer > 0) {
-                const heart = document.createElement('div');
-                heart.innerText = '❤️';
-                heart.classList.add('falling-heart');
-                heart.style.left = `${Math.random() * 90}%`;
-                heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
-                heart.addEventListener('click', () => {
-                    score++;
-                    scoreDisplay.innerText = score;
-                    heart.remove();
-                }, { once: true });
-                gameArea.appendChild(heart);
-            }
-        }
-        heartInterval = setInterval(createHeart, 600);
-
-        const countdown = setInterval(() => {
-            timer--;
-            if (timer >= 0) {
-                timerDisplay.innerText = timer;
-            }
-            if (timer < 0) {
-                clearInterval(heartInterval);
-                clearInterval(countdown);
-                gameArea.innerHTML = "";
-                alert(score >= 5 ? 'Harika! Başardın!' : 'Neredeyse! Ama benim için her zaman kazanan sensin.');
-                runUnscrambleGame();
-            }
-        }, 1000);
-    }
-    
-    function runUnscrambleGame() {
-        const gameZone = document.getElementById('game-zone-container');
-        const word = "SONSUZA";
-        const scrambled = word.split('').sort(() => 0.5 - Math.random());
-        
-        gameZone.innerHTML = `
-            <div class="content-card game-card">
-                <h2>Son Engel: Kelime Avı</h2>
-                <p>Bu kelime bizim hikayemizi anlatıyor. Doğru sırala!</p>
-                <div id="scrambled-word">${scrambled.map(l => `<span class="letter-tile">${l}</span>`).join('')}</div>
-                <input type="text" id="unscramble-input" class="app-input" placeholder="Cevabın...">
-                <button id="check-word-btn" class="app-button">Kontrol Et</button>
-            </div>
-        `;
-        document.getElementById('check-word-btn').addEventListener('click', () => {
-            const answer = document.getElementById('unscramble-input').value.toUpperCase();
-            if (answer === word) {
-                alert('BİLDİN! Harikasın! İşte ödülün geliyor...');
-                generateCertificate();
-                showStep(6);
-            } else {
-                alert('Hmm, tekrar dene! Bizim için doğru kelimeyi bulabilirsin.');
-            }
-        });
-    }
-
-    // --- FİNAL ---
-    function generateCertificate() {
-        document.getElementById('partner-name-display').textContent = partnerName;
-        document.getElementById('partner-signature-display').textContent = partnerName;
-        
-        const list = document.getElementById('contract-summary-list');
-        list.innerHTML = '';
-        contractClauses.forEach(clause => {
-            if (clause.accepted) {
-                const li = document.createElement('li');
-                li.textContent = clause.text;
-                if(clause.type === 'custom') li.style.fontWeight = 'bold';
-                list.appendChild(li);
-            }
-        });
-
-        document.getElementById('cert-date').textContent = new Date().toLocaleDateString('tr-TR');
-        sendEmail();
-    }
-    
-    function sendEmail() {
-        if (!EMAILJS_TEMPLATE_ID.includes('YOUR_')) {
-            emailjs.init(EMAILJS_PUBLIC_KEY);
-            let summary = `Kabul Edilen Maddeler:\n${contractClauses.filter(c => c.accepted === true).map(c => `- ${c.text}`).join('\n')}\n\n`;
-            summary += `Tekrar Düşünülecek Maddeler:\n${contractClauses.filter(c => c.accepted === false).map(c => `- ${c.text}`).join('\n') || 'Yok'}`;
-            
-            const templateParams = { partner_name: partnerName, message: summary };
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-                   .then(res => console.log("E-posta gönderildi.", res.status))
-                   .catch(err => console.error("E-posta hatası:", err));
-        }
-    }
-
-    // --- OYUN FONKSİYONLARI ---
-    let gameScore = 0;
-    let gameActive = false;
-    let gameInterval;
-    let heartCount = 0;
-
-    function startHeartsGame() {
-        gameScore = 0;
-        gameActive = true;
-        heartCount = 0;
-        document.getElementById('game-score').textContent = `Skor: ${gameScore}`;
-        document.getElementById('start-hearts-game').style.display = 'none';
-        document.getElementById('game-message').textContent = 'Kalpleri yakala! 💕';
-        
-        gameInterval = setInterval(createFallingHeart, 1000);
-        
-        setTimeout(() => {
-            if (gameActive) {
-                endGame();
-            }
-        }, 15000); // 15 saniye oyun süresi
-    }
-
-    function createFallingHeart() {
-        if (!gameActive) return;
-        
-        const gameCanvas = document.getElementById('game-canvas');
-        const heart = document.createElement('div');
-        heart.className = 'falling-heart';
-        heart.textContent = ['💖', '💝', '💕', '💗', '💘'][Math.floor(Math.random() * 5)];
-        heart.style.left = Math.random() * (gameCanvas.offsetWidth - 50) + 'px';
-        heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        
-        heart.addEventListener('click', () => {
-            if (gameActive) {
-                gameScore++;
-                heartCount++;
-                document.getElementById('game-score').textContent = `Skor: ${gameScore}`;
-                heart.remove();
-                
-                // Parçacık efekti
-                createHeartParticles(heart.offsetLeft, heart.offsetTop);
-                
-                if (gameScore >= 10) {
-                    endGame(true);
-                }
-            }
-        });
-        
-        gameCanvas.appendChild(heart);
-        
-        setTimeout(() => {
-            if (heart.parentNode) {
-                heart.remove();
-            }
-        }, 5000);
-    }
-
-    function createHeartParticles(x, y) {
-        for (let i = 0; i < 5; i++) {
-            const particle = document.createElement('div');
-            particle.textContent = '✨';
-            particle.style.position = 'absolute';
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            particle.style.fontSize = '1em';
-            particle.style.pointerEvents = 'none';
-            particle.style.animation = `particleFloat 1s ease-out forwards`;
-            particle.style.animationDelay = (i * 0.1) + 's';
-            
-            document.getElementById('game-canvas').appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 1000);
-        }
-    }
-
-    function endGame(won = false) {
-        gameActive = false;
-        clearInterval(gameInterval);
-        document.querySelectorAll('.falling-heart').forEach(heart => heart.remove());
-        
-        if (won) {
-            document.getElementById('game-message').innerHTML = '🎉 Tebrikler! Aşkımız kazandı! 🎉';
-            setTimeout(() => showStep(6), 2000);
-        } else {
-            document.getElementById('game-message').innerHTML = `Oyun bitti! ${gameScore} kalp yakaladın ❤️`;
-            document.getElementById('start-hearts-game').style.display = 'inline-block';
-            document.getElementById('start-hearts-game').textContent = 'Tekrar Oyna';
-        }
-    }
-
-    // --- KONFETTI VE KUTLAMA FONKSİYONLARI ---
-    function createConfetti() {
-        if (typeof confetti !== 'undefined') {
-            // Canvas confetti kütüphanesi varsa onu kullan
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#e91e63', '#ff6b9d', '#ffc1cc', '#ffb3ba']
-            });
-            
-            setTimeout(() => {
-                confetti({
-                    particleCount: 50,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#e91e63', '#ff6b9d', '#ffc1cc']
-                });
-            }, 200);
-            
-            setTimeout(() => {
-                confetti({
-                    particleCount: 50,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#e91e63', '#ff6b9d', '#ffc1cc']
-                });
-            }, 400);
-        } else {
-            // Manuel konfetti
-            createManualConfetti();
-        }
-    }
-
-    function createManualConfetti() {
-        for (let i = 0; i < 50; i++) {
-            const confettiPiece = document.createElement('div');
-            confettiPiece.className = 'confetti-particle';
-            confettiPiece.style.left = Math.random() * 100 + 'vw';
-            confettiPiece.style.backgroundColor = ['#e91e63', '#ff6b9d', '#ffc1cc', '#ffb3ba'][Math.floor(Math.random() * 4)];
-            confettiPiece.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
-            confettiPiece.style.animationDelay = Math.random() * 2 + 's';
-            
-            document.body.appendChild(confettiPiece);
-            
-            setTimeout(() => {
-                confettiPiece.remove();
-            }, 5000);
-        }
-    }
-
-    // Sertifika indirme fonksiyonu
-    function downloadCertificate() {
-        const certificate = document.getElementById('certificate');
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // HTML2Canvas alternatifi - basit text tabanlı görsel
-        canvas.width = 800;
-        canvas.height = 600;
-        
-        // Arka plan
-        ctx.fillStyle = '#fffdf9';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Başlık
-        ctx.fillStyle = '#e91e63';
-        ctx.font = 'bold 32px serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('AŞK YEMİNİ SERTİFİKASI', canvas.width/2, 100);
-        
-        // İsimler
-        ctx.font = 'bold 24px cursive';
-        ctx.fillText(`Sinan Soytürk & ${partnerName}`, canvas.width/2, 200);
-        
-        // Tarih
-        ctx.font = '16px serif';
-        ctx.fillStyle = '#666';
-        ctx.fillText(`Tarih: ${new Date().toLocaleDateString('tr-TR')}`, canvas.width/2, 500);
-        
-        // İndir
-        const link = document.createElement('a');
-        link.download = 'ask-yemini-sertifikamiz.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    }
-
-    // Event listeners
-    if (celebrateBtn) {
-        celebrateBtn.addEventListener('click', () => {
+// Gift Box Logic
+const giftBox = document.getElementById('gift-box');
+if (giftBox) {
+    giftBox.addEventListener('click', () => {
+        if (!giftBox.classList.contains('open')) {
+            giftBox.classList.add('open');
             createConfetti();
-            celebrateBtn.textContent = '🎉 Seni Sonsuza Dek Seviyorum! 🎉';
-            celebrateBtn.style.animation = 'celebrateGlow 1s infinite alternate';
+            setTimeout(() => {
+                navigateTo('story-screen');
+            }, 2000);
+        }
+    });
+}
+
+// Letter Logic
+function tryOpenLetter(id) {
+    if (id > currentLevel) {
+        // Locked animation
+        const el = document.getElementById(`env-${id}`);
+        el.style.animation = 'shake 0.5s';
+        setTimeout(() => el.style.animation = '', 500);
+        return;
+    }
+    
+    openLetter(id);
+}
+
+function openLetter(id) {
+    const letter = letters[id];
+    document.getElementById('letter-title').textContent = letter.title;
+    document.getElementById('letter-body').innerHTML = letter.body;
+    
+    // Update button based on level
+    const navBtn = document.querySelector('#reading-screen .nav-btn');
+    if (id < maxLevel) {
+        navBtn.innerHTML = `Sıradaki Görev <i class="fas fa-puzzle-piece"></i>`;
+        navBtn.onclick = () => startChallenge(id);
+    } else {
+        navBtn.innerHTML = `Yolculuğa Çık <i class="fas fa-plane"></i>`;
+        navBtn.onclick = () => startFlightJourney();
+    }
+    
+    navigateTo('reading-screen');
+}
+
+// Game Logic
+function startChallenge(level) {
+    navigateTo('game-screen');
+    const gameArea = document.getElementById('game-content-area');
+    const title = document.getElementById('game-title');
+    const instr = document.getElementById('game-instruction');
+    const feedback = document.getElementById('game-feedback');
+    
+    gameArea.innerHTML = '';
+    feedback.classList.add('hidden');
+    feedback.textContent = '';
+    
+    if (level === 1) {
+        // Game 1: Date Code
+        title.textContent = "Hatıra Şifresi";
+        instr.textContent = "Her şeyin başladığı o özel tarih? (GünAyYıl - Örn: 01012025)";
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'game-input';
+        input.placeholder = 'Tarihi giriniz...';
+        
+        const btn = document.createElement('button');
+        btn.className = 'game-btn';
+        btn.textContent = 'Kilidi Aç';
+        btn.onclick = () => {
+            if (input.value === '17062025' || input.value === '17.06.2025') {
+                completeLevel(2);
+            } else {
+                feedback.textContent = 'Yanlış tarih... İpucu: Haziran';
+                feedback.classList.remove('hidden');
+                input.style.borderColor = 'red';
+            }
+        };
+        
+        gameArea.appendChild(input);
+        gameArea.appendChild(btn);
+        
+    } else if (level === 2) {
+        // Game 2: Catch the Heart
+        title.textContent = "Kalbi Yakala";
+        instr.textContent = "Kaçan kalbi 5 kez yakala!";
+        
+        let score = 0;
+        const target = document.createElement('div');
+        target.className = 'moving-target';
+        target.textContent = '❤️';
+        target.style.position = 'absolute';
+        
+        const scoreDisplay = document.createElement('div');
+        scoreDisplay.textContent = `Skor: 0/5`;
+        scoreDisplay.style.marginBottom = '20px';
+        scoreDisplay.style.color = 'white';
+        
+        gameArea.appendChild(scoreDisplay);
+        gameArea.appendChild(target);
+        
+        // Initial position
+        moveTarget(target, gameArea);
+        
+        target.onclick = () => {
+            score++;
+            scoreDisplay.textContent = `Skor: ${score}/5`;
+            if (score >= 5) {
+                completeLevel(3);
+            } else {
+                moveTarget(target, gameArea);
+            }
+        };
+        
+    } else if (level === 3) {
+        // Game 3: Memory Match
+        title.textContent = "Aşk Hafızası";
+        instr.textContent = "Kartları eşleştir!";
+        
+        const emojis = ['🌹', '💍', '💑', '🏰'];
+        const cards = [...emojis, ...emojis];
+        // Shuffle
+        cards.sort(() => Math.random() - 0.5);
+        
+        const grid = document.createElement('div');
+        grid.className = 'memory-grid';
+        
+        let flipped = [];
+        let matched = 0;
+        
+        cards.forEach((emoji, index) => {
+            const card = document.createElement('div');
+            card.className = 'memory-card';
+            card.dataset.emoji = emoji;
+            card.dataset.index = index;
+            card.textContent = '?';
+            
+            card.onclick = () => {
+                if (flipped.length < 2 && !card.classList.contains('flipped')) {
+                    card.classList.add('flipped');
+                    card.textContent = emoji;
+                    flipped.push(card);
+                    
+                    if (flipped.length === 2) {
+                        setTimeout(() => {
+                            if (flipped[0].dataset.emoji === flipped[1].dataset.emoji) {
+                                matched++;
+                                flipped = [];
+                                if (matched === emojis.length) {
+                                    completeLevel(4);
+                                }
+                            } else {
+                                flipped[0].classList.remove('flipped');
+                                flipped[0].textContent = '?';
+                                flipped[1].classList.remove('flipped');
+                                flipped[1].textContent = '?';
+                                flipped = [];
+                            }
+                        }, 800);
+                    }
+                }
+            };
+            grid.appendChild(card);
         });
+        
+        gameArea.appendChild(grid);
     }
+}
 
-    const downloadBtn = document.getElementById('download-certificate');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', downloadCertificate);
-    }
+function moveTarget(el, container) {
+    const x = Math.random() * 200 - 100; // Simple range
+    const y = Math.random() * 100 - 50;
+    el.style.transform = `translate(${x}px, ${y}px)`;
+}
 
-    // CSS animasyonları dinamik ekleme
-    const additionalStyles = document.createElement('style');
-    additionalStyles.textContent = `
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+function completeLevel(nextLevel) {
+    const feedback = document.getElementById('game-feedback');
+    feedback.textContent = 'Başardın! Kilit açılıyor...';
+    feedback.classList.remove('hidden');
+    feedback.style.color = '#4cd137';
+    
+    setTimeout(() => {
+        currentLevel = nextLevel;
+        
+        // Update UI
+        document.getElementById(`env-${nextLevel}`).classList.remove('locked');
+        document.getElementById(`env-${nextLevel}`).classList.add('unlocked');
+        document.getElementById(`env-${nextLevel}`).querySelector('.envelope-icon i').className = 'fas fa-envelope-open-text';
+        document.getElementById(`env-${nextLevel}`).querySelector('.heart-seal').textContent = '❤️';
+        
+        if (document.getElementById(`line-${nextLevel-1}`)) {
+            document.getElementById(`line-${nextLevel-1}`).classList.add('unlocked');
         }
         
-        @keyframes particleFloat {
-            0% { 
-                transform: translate(0, 0) scale(1); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translate(${Math.random() * 100 - 50}px, -50px) scale(0.5); 
-                opacity: 0; 
-            }
-        }
-    `;
-    document.head.appendChild(additionalStyles);
+        navigateTo('letters-screen');
+        createConfetti();
+    }, 1500);
+}
 
-    // İlk adımı başlat
-    showStep(0);
+// Flight Animation Logic
+function startFlightJourney() {
+    navigateTo('flight-screen');
+    
+    const plane = document.getElementById('plane-icon');
+    const distanceCounter = document.getElementById('distance-counter');
+    const path = document.getElementById('flight-path');
+    const progressPath = document.getElementById('flight-progress');
+    
+    // Coordinates matching CSS positions (Trabzon -> Igdir)
+    const startPos = { x: 73, y: 22 };
+    const endPos = { x: 93, y: 35 };
+    const controlPos = { x: 83, y: 10 }; // Curve upwards
+    
+    // Set SVG Path
+    const pathString = `M ${startPos.x} ${startPos.y} Q ${controlPos.x} ${controlPos.y} ${endPos.x} ${endPos.y}`;
+    path.setAttribute('d', pathString);
+    progressPath.setAttribute('d', pathString);
+    
+    // Get path length for drawing animation
+    const length = path.getTotalLength();
+    progressPath.style.strokeDasharray = length;
+    progressPath.style.strokeDashoffset = length;
+    
+    let start = null;
+    const duration = 5000; // 5 seconds
+    
+    function animate(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percent = Math.min(progress / duration, 1);
+        
+        // Quadratic Bezier Curve Calculation
+        const t = percent;
+        const x = (1-t)*(1-t)*startPos.x + 2*(1-t)*t*controlPos.x + t*t*endPos.x;
+        const y = (1-t)*(1-t)*startPos.y + 2*(1-t)*t*controlPos.y + t*t*endPos.y;
+        
+        // Calculate rotation (Derivative)
+        const dx = 2*(1-t)*(controlPos.x - startPos.x) + 2*t*(endPos.x - controlPos.x);
+        const dy = 2*(1-t)*(controlPos.y - startPos.y) + 2*t*(endPos.y - controlPos.y);
+        const rot = Math.atan2(dy, dx) * 180 / Math.PI;
+        
+        // Apply position
+        plane.style.left = x + '%';
+        plane.style.top = y + '%';
+        plane.style.transform = `translate(-50%, -50%) rotate(${rot}deg)`;
+        
+        // Update distance text
+        const currentDist = Math.floor(percent * 495);
+        distanceCounter.textContent = currentDist;
+        
+        // Update SVG path drawing
+        progressPath.style.strokeDashoffset = length - (length * percent);
+        
+        if (progress < duration) {
+            requestAnimationFrame(animate);
+        } else {
+            setTimeout(() => {
+                navigateTo('arrival-screen');
+                // Reset stages
+                document.getElementById('proposal-stage').style.display = 'block';
+                document.getElementById('ring-stage').style.display = 'none';
+                document.getElementById('certificate-stage').style.display = 'none';
+                createHearts();
+            }, 500);
+        }
+    }
+    
+    requestAnimationFrame(animate);
+}
+
+// Proposal Logic
+function acceptProposal() {
+    const proposalStage = document.getElementById('proposal-stage');
+    const ringStage = document.getElementById('ring-stage');
+    const certStage = document.getElementById('certificate-stage');
+    
+    // 1. Hide Proposal, Show Ring
+    proposalStage.style.display = 'none';
+    ringStage.style.display = 'flex';
+    
+    // 2. Wait for animation, then Show Certificate
+    setTimeout(() => {
+        ringStage.style.display = 'none';
+        certStage.style.display = 'block';
+        
+        // Set Date
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+        const dateEl = document.getElementById('cert-date');
+        if(dateEl) dateEl.textContent = dateStr;
+        
+        // Celebration
+        createConfetti();
+        setInterval(createConfetti, 3000); // Continuous confetti
+        
+    }, 4000); // 4 seconds for ring animation
+}
+
+// Effects
+function createConfetti() {
+    const colors = ['#ff6b9d', '#c44569', '#ffd700', '#ffffff'];
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.zIndex = '1000';
+        confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 5000);
+    }
+}
+
+// Add keyframes for confetti
+const styleSheet = document.createElement("style");
+styleSheet.innerText = `
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(720deg);
+        }
+    }
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+    }
+`;
+document.head.appendChild(styleSheet);
+
+function createHearts() {
+    const container = document.getElementById('floating-elements');
+    if (!container) return;
+    
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.bottom = '-20px';
+        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+        heart.style.opacity = Math.random();
+        heart.style.animation = `floatUp ${Math.random() * 5 + 5}s linear forwards`;
+        container.appendChild(heart);
+        
+        setTimeout(() => heart.remove(), 10000);
+    }, 500);
+}
+
+// Add keyframes for hearts
+styleSheet.innerText += `
+    @keyframes floatUp {
+        to {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+`;
+
+// Music Toggle
+const musicBtn = document.getElementById('music-toggle');
+const audio = document.getElementById('bg-music');
+let isPlaying = false;
+
+if (musicBtn) {
+    musicBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+            audio.play().catch(e => console.log("Audio play failed", e));
+            musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+    });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    createHearts();
 });

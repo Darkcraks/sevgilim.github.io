@@ -1,0 +1,467 @@
+// Mektup İçerikleri
+const letters = {
+    1: {
+        title: "17 Haziran - İlk Görüşümüz 💕",
+        content: `
+            <p>Hicran'ım,</p>
+            <p>17 Haziran 2024... Bu tarihi hiç unutmayacağım. Seni ilk gördüğüm o an, sanki zaman durdu. Gözlerin, gülüşün, varlığın... Her şey çok özeldi. Kalbim ilk kez böyle çarpmıştı. İlk görüşte aşk diye bir şey varmış, sen bana bunu kanıtladın.</p>
+            <p>O günden beri her gün seni daha çok seviyorum. Sen benim için bir mucize gibisin. Hayatıma girdiğin andan itibaren her şey daha anlamlı, daha güzel, daha renkli oldu. Bir yola girdik o gün, birlikte yürüdüğümüz bu yol bazen zor oldu ama her zaman güzeldi.</p>
+            <p>495 kilometre uzakta olsan da, kalbimde hep yanımdasın. Her nefesimde senin kokun, her gülüşümde senin sevgin var. Sen benim her şeyimsin.</p>
+            <p class="highlight">17 Haziran bizim başlangıcımız, seninle her gün yeni bir başlangıç! ❤️</p>
+        `
+    },
+    2: {
+        title: "Gece Düşünceleri 🌙",
+        content: `
+            <p>Canım benim,</p>
+            <p>Geceleri yatarken hep seni düşünüyorum. Yanımda olmadığın her an, kalbim senin için atıyor. Yıldızlara bakarken, acaba sen de aynı yıldızlara mı bakıyorsun, acaba beni düşünüyor musun diye merak ediyorum.</p>
+            <p>Trabzon'un soğuk gecelerinde, senin sıcaklığını özlüyorum. Iğdır'ın gökyüzü altında sen varsın, ben buradayım ama ruhlarımız hep bir arada. Mesafe sadece fiziksel, kalplerimiz hep birlikte atıyor.</p>
+            <p>Sesini duymak, gülüşünü görmek, elini tutmak için sabırsızlanıyorum. Her telefon görüşmemiz, her mesajın benim için bir hediye, bir mutluluk kaynağı. Seninle konuştuğumda dünya durur, sadece biz kalırız.</p>
+            <p class="highlight">Uzaktayız ama kalpler yakın... Her zaman seninle! 🌙✨</p>
+        `
+    },
+    3: {
+        title: "10 Temmuz - Senin Özel Günün 🎂",
+        content: `
+            <p>Sevgilim,</p>
+            <p>10 Temmuz... Senin dünyaya geldiğin o muhteşem gün. Dünya senin doğumunla daha güzel oldu. Her 10 Temmuz'da, seni tanıdığım için şükrediyorum. Doğum günün benim için bir bayram, çünkü sen varsın diye kutluyorum.</p>
+            <p>Temmuz güneşi gibi sıcaksın, temmuz yağmuru gibi ferahlatıcısın. Doğum günün geldiğinde, seni ne kadar çok sevdiğimi bir kez daha hatırlatmak istiyorum. Sen benim en değerli hediyemsin, hayatıma kattığın renk paha biçilemez.</p>
+            <p>Her yaş gününde yanında olmak istiyorum. Pasta keserken, mum üflerken, dilek tutarken yanında olmak istiyorum. Ama şimdilik uzaktayız, yine de kalbim seninle her 10 Temmuz'da.</p>
+            <p class="highlight">10 Temmuz benim için de özel, çünkü sen varsın! 🎉💕</p>
+        `
+    },
+    4: {
+        title: "11 Ocak - Benim Günüm ❄️",
+        content: `
+            <p>Hicran'ım,</p>
+            <p>11 Ocak'ta dünyaya geldim, seni bulabilmek için. Ocağın soğuğunda doğdum ama sen kalbimi ısıttın. Her 11 Ocak'ta, seninle tanıştığım için ne kadar şanslı olduğumu düşünürüm. Doğum günüm seninle çok daha anlamlı.</p>
+            <p>Sen 10 Temmuz, ben 11 Ocak... İki farklı mevsim, iki farklı gün ama aynı kalp. Senin sıcaklığın benim soğukluğumu eritiyor, benim sevgim senin günlerini aydınlatıyor. Birbirimiz için yaratılmışız sanki.</p>
+            <p>Doğum günlerimiz farklı ama sevgimiz bir. Her gün seninle kutlama gibi. Her an seninle özel. Seni sevmek benim için bir hediye, her günümü bayram yapan şey sensin.</p>
+            <p class="highlight">Temmuz güneşi ve Ocak karı... Biz birlikte mükemmeliz! ❄️☀️</p>
+        `
+    },
+    5: {
+        title: "Hayallerimiz ve Geleceğimiz 🌟",
+        content: `
+            <p>Aşkım,</p>
+            <p>Geleceği seninle hayal ediyorum. Küçük bir evimiz olacak, bahçesi olacak. Sabahları birlikte kahvaltı yapacağız, Van kahvaltısı mı Trabzon hamsisi mi tartışacağız ama ikisini de seveceğiz. Her sabah seninle uyanmak, her akşam seninle uyumak...</p>
+            <p>10 Temmuz'larda sana en güzel hediyeleri alacağım, 11 Ocak'larda sen bana en güzel sürprizleri yapacaksın. Her 17 Haziran'da yıl dönümümüzü kutlayacağız, o ilk günü hatırlayacağız ve ne kadar yol kat ettiğimize şaşıracağız.</p>
+            <p>Koltukta film izlerken sarılmak, mutfakta birlikte yemek yapmak, hafta sonları el ele gezmeye çıkmak... Bunlar benim hayallerim, bizim hayallerimiz. Hayallerimiz gerçek olacak, birlikte güzel bir gelecek kuracağız.</p>
+            <p class="highlight">Gelecek seninle çok güzel olacak! Her gün 17 Haziran gibi güzel! 🏡💕</p>
+        `
+    }
+};
+
+let currentScreen = 'welcome-screen';
+
+// ==================== EKRAN DEĞİŞTİRME ====================
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        setTimeout(() => {
+            targetScreen.classList.add('active');
+        }, 100);
+    }
+    
+    currentScreen = screenId;
+}
+
+// ==================== HEDİYE KUTUSU ====================
+const giftBoxWrapper = document.getElementById('gift-box-wrapper');
+
+if (giftBoxWrapper) {
+    giftBoxWrapper.addEventListener('click', function() {
+        this.classList.add('opening');
+        
+        // Konfeti efekti
+        createConfetti();
+        
+        // Ses efekti (opsiyonel)
+        playOpenSound();
+        
+        setTimeout(() => {
+            showScreen('our-story-screen');
+        }, 1000);
+    });
+}
+
+// ==================== BİZİM HİKAYEMİZ - MEKTUPLARA GEÇİŞ ====================
+const continueToLettersBtn = document.getElementById('continue-to-letters');
+if (continueToLettersBtn) {
+    continueToLettersBtn.addEventListener('click', function() {
+        showScreen('letter-select-screen');
+    });
+}
+
+// ==================== MEKTUP SEÇİMİ ====================
+document.querySelectorAll('.letter-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const letterId = this.getAttribute('data-letter');
+        if (letterId && letters[letterId]) {
+            openLetter(letterId);
+        }
+    });
+});
+
+function openLetter(letterId) {
+    const letter = letters[letterId];
+    
+    const titleElement = document.getElementById('letter-title');
+    const contentElement = document.getElementById('letter-content');
+    
+    if (titleElement && contentElement) {
+        titleElement.textContent = letter.title;
+        contentElement.innerHTML = letter.content;
+    }
+    
+    showScreen('letter-read-screen');
+}
+
+// ==================== MEKTUP OKUDUKTAN SONRA ====================
+const continueBtn = document.getElementById('continue-journey');
+if (continueBtn) {
+    continueBtn.addEventListener('click', function() {
+        showScreen('flight-screen');
+        
+        setTimeout(() => {
+            startFlight();
+        }, 800);
+    });
+}
+
+// ==================== UÇAK YOLCULUĞU ====================
+function startFlight() {
+    const airplane = document.getElementById('airplane');
+    const flightRoute = document.getElementById('flight-route');
+    const distanceCount = document.getElementById('distance-count');
+    const flightStatus = document.querySelector('.flight-status');
+    
+    if (!airplane || !flightRoute || !distanceCount || !flightStatus) return;
+    
+    // Animasyonları başlat
+    airplane.classList.add('flying');
+    flightRoute.classList.add('animating');
+    
+    // Mesafe sayacı
+    let distance = 0;
+    const targetDistance = 495;
+    const duration = 4000; // 4 saniye
+    const steps = 100;
+    const increment = targetDistance / steps;
+    const interval = duration / steps;
+    
+    flightStatus.textContent = 'Kalkış hazırlıkları...';
+    
+    setTimeout(() => {
+        flightStatus.textContent = 'Uçuş başladı! 🛫';
+    }, 500);
+    
+    const counter = setInterval(() => {
+        distance += increment;
+        
+        if (distance >= targetDistance) {
+            distance = targetDistance;
+            clearInterval(counter);
+            
+            setTimeout(() => {
+                flightStatus.textContent = 'Iğdır\'a vardık! 🛬';
+                
+                setTimeout(() => {
+                    showScreen('arrival-screen');
+                }, 1500);
+            }, 500);
+        }
+        
+        distanceCount.textContent = Math.floor(distance);
+        
+        // Durum mesajlarını güncelle
+        if (distance > 100 && distance < 150) {
+            flightStatus.textContent = 'Karadeniz üzerindeyiz 🌊';
+        } else if (distance > 250 && distance < 300) {
+            flightStatus.textContent = 'Doğu Anadolu\'ya yaklaşıyoruz ⛰️';
+        } else if (distance > 400 && distance < 450) {
+            flightStatus.textContent = 'Iğdır görünüyor! 🎯';
+        }
+    }, interval);
+}
+
+// ==================== VARIŞ - KIZ KARAKTER ====================
+const girlCharacter = document.getElementById('girl-character');
+if (girlCharacter) {
+    girlCharacter.addEventListener('click', function() {
+        // Kalp animasyonu
+        createHearts();
+        
+        // Ses efekti
+        playHeartSound();
+        
+        // Karakter animasyonu
+        this.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 300);
+        
+        setTimeout(() => {
+            showScreen('final-message-screen');
+        }, 1000);
+    });
+}
+
+// ==================== YENİDEN BAŞLA ====================
+const restartBtn = document.getElementById('restart-journey');
+if (restartBtn) {
+    restartBtn.addEventListener('click', function() {
+        // Tüm animasyonları sıfırla
+        resetAnimations();
+        
+        setTimeout(() => {
+            showScreen('welcome-screen');
+        }, 300);
+    });
+}
+
+function resetAnimations() {
+    const giftBoxWrapper = document.getElementById('gift-box-wrapper');
+    const airplane = document.getElementById('airplane');
+    const flightRoute = document.getElementById('flight-route');
+    const distanceCount = document.getElementById('distance-count');
+    const flightStatus = document.getElementById('flight-status');
+    
+    if (giftBoxWrapper) {
+        giftBoxWrapper.classList.remove('opening');
+    }
+    
+    if (airplane) {
+        airplane.classList.remove('flying');
+    }
+    
+    if (flightRoute) {
+        flightRoute.classList.remove('animating');
+    }
+    
+    if (distanceCount) {
+        distanceCount.textContent = '0';
+    }
+    
+    if (flightStatus) {
+        flightStatus.textContent = 'Hazırlanıyor';
+    }
+}
+
+// ==================== KONFETİ ANİMASYONU ====================
+function createConfetti() {
+    const colors = ['#ff6b9d', '#c44569', '#ffa502', '#ffd700', '#ff4081', '#f50057'];
+    const confettiCount = 100;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            const size = Math.random() * 10 + 5;
+            
+            confetti.style.position = 'fixed';
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = '-20px';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.opacity = '1';
+            confetti.style.transition = 'all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                const randomX = (Math.random() - 0.5) * 300;
+                const randomRotation = Math.random() * 720;
+                
+                confetti.style.top = window.innerHeight + 100 + 'px';
+                confetti.style.left = (parseFloat(confetti.style.left) + randomX) + 'px';
+                confetti.style.transform = `rotate(${randomRotation}deg)`;
+                confetti.style.opacity = '0';
+            }, 50);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 3500);
+        }, i * 15);
+    }
+}
+
+// ==================== KALP ANİMASYONU ====================
+function createHearts() {
+    const heartEmojis = ['❤️', '💕', '💖', '💗', '💝', '💘', '💓', '💞'];
+    const heartCount = 30;
+    
+    for (let i = 0; i < heartCount; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            const size = Math.random() * 30 + 25;
+            
+            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.position = 'fixed';
+            heart.style.fontSize = size + 'px';
+            heart.style.left = (Math.random() * window.innerWidth) + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.opacity = '1';
+            heart.style.transition = 'all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                const randomX = (Math.random() - 0.5) * 200;
+                const randomRotation = Math.random() * 360;
+                
+                heart.style.top = '-100px';
+                heart.style.left = (parseFloat(heart.style.left) + randomX) + 'px';
+                heart.style.transform = `rotate(${randomRotation}deg) scale(${Math.random() + 0.5})`;
+                heart.style.opacity = '0';
+            }, 50);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3500);
+        }, i * 80);
+    }
+}
+
+// ==================== PARTİKÜL OLUŞTUR ====================
+function createParticles() {
+    const particlesBg = document.querySelectorAll('.particles-bg');
+    
+    particlesBg.forEach(container => {
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            const size = Math.random() * 4 + 1;
+            
+            particle.style.position = 'absolute';
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.background = `rgba(255, ${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, ${Math.random() * 0.5 + 0.2})`;
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.pointerEvents = 'none';
+            particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            
+            container.appendChild(particle);
+        }
+    });
+}
+
+// Float animasyonu için CSS ekle
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes float {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+// ==================== SES EFEKTLERİ (Opsiyonel) ====================
+function playOpenSound() {
+    // Gerçek ses dosyası eklenebilir
+    console.log('🎁 Hediye kutusu açıldı!');
+}
+
+function playHeartSound() {
+    // Gerçek ses dosyası eklenebilir
+    console.log('💕 Kalp sesi çaldı!');
+}
+
+// ==================== MOBİL DOKUNMA ====================
+document.addEventListener('touchstart', function() {}, {passive: true});
+
+// Çift dokunma zoom engelleme
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+// ==================== KLAVYE KISA YOLLARI ====================
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const giftBoxWrapper = document.getElementById('gift-box-wrapper');
+        if (giftBoxWrapper) {
+            giftBoxWrapper.classList.remove('opening');
+        }
+        showScreen('welcome-screen');
+    }
+});
+
+// ==================== SAYFA YÜKLENDİĞİNDE ====================
+window.addEventListener('load', () => {
+    // Partikülleri oluştur
+    createParticles();
+    
+    // Başlangıç animasyonları
+    setTimeout(() => {
+        const fadeElements = document.querySelectorAll('.fade-in, .fade-in-delay, .fade-in-delay-2');
+        fadeElements.forEach(el => {
+            el.style.opacity = '1';
+        });
+    }, 200);
+    
+    // Hoş geldin mesajı
+    console.log('%c💕 Hicran için özel site hazır! 💕', 'color: #ff6b9d; font-size: 20px; font-weight: bold;');
+    console.log('%c✨ Trabzon\'dan Iğdır\'a sevgiyle... ✨', 'color: #ffa502; font-size: 14px;');
+});
+
+// ==================== WINDOW RESIZE ====================
+window.addEventListener('resize', () => {
+    // Responsive ayarlamalar otomatik CSS ile yapılıyor
+});
+
+// ==================== ERROR HANDLING ====================
+window.addEventListener('error', (e) => {
+    console.error('Bir hata oluştu:', e.message);
+});
+
+// ==================== PERFORMANCE ====================
+// Lazy loading için intersection observer
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Tüm letter cardları gözlemle
+document.querySelectorAll('.letter-card').forEach(card => {
+    observer.observe(card);
+});
+
+console.log('🚀 Site başarıyla yüklendi!');
